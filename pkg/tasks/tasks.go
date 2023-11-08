@@ -1,9 +1,10 @@
 package tasks
 
 type Task struct {
-	ID    int
-	Title string
-	Done  bool
+	ID          int
+	Title       string
+	Description string
+	Done        bool
 }
 
 var inMemoryTasks map[int]Task
@@ -32,4 +33,39 @@ func GetTasks() []Task {
 
 	return tasks
 
+}
+
+func AddTask(title string, description string) (int, error) {
+	// TODO - Add validation
+
+	id := len(inMemoryTasks) + 1
+	inMemoryTasks[id] = Task{
+		ID:          id,
+		Title:       title,
+		Description: description,
+		Done:        false,
+	}
+	return id, nil
+}
+
+func MarkAsDone(id int) {
+	// Convert map to slice of values
+	task, ok := inMemoryTasks[id]
+	if !ok {
+		return
+	}
+
+	task.Done = true
+	inMemoryTasks[id] = task
+}
+
+func MarkAsTodo(id int) {
+	// Convert map to slice of values
+	task, ok := inMemoryTasks[id]
+	if !ok {
+		return
+	}
+
+	task.Done = false
+	inMemoryTasks[id] = task
 }
