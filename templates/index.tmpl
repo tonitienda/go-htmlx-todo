@@ -11,18 +11,42 @@
 <body>
     <div class="main">
         <h1>TODO</h1>
-        <div>
-            <form 
-                hx-post="/tasks" 
-                hx-trigger="submit"
-                hx-target="#todolist"
-                hx-swap="innerHTML"
-                >
-                <input type="text" name="title" placeholder="New task" />
-                <textarea name="description" placeholder="Description"></textarea>
-                <button type="submit">Add</button>
-            </form>
-        <div id="todolist" class="col-sm-6" hx-get="/tasks" hx-trigger="load" />
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="card text-white bg-secondary">
+                 <div class="card-header">Add a new task</div>
+                 <div class="card-body">
+  
+                    <form
+                        hx-post="/tasks" 
+                        hx-trigger="submit"
+                        hx-target="#todolist"
+                        hx-swap="innerHTML"
+                        >
+                        <fieldset>
+                        <legend>Add a new task</legend>
+                            <div class="form-group">
+                                <label for="title" class="form-label mt-4">Title</label>
+                                <input type="text" class="form-control" id="title" name="title" aria-describedby="titleHelp" placeholder="Enter title">
+                                <small id="titleHelp" class="form-text text-muted">Short description of the task</small>
+                            </div>
+                                <div class="form-group">
+                                <label for="description" class="form-label mt-4">Description</label>
+                                <textarea class="form-control" id="description" name="description" rows="3"></textarea>
+                            </div>
+                    </fieldset>
+                    <button type="submit" class="btn btn-primary">Add</button>
+
+                    </form>
+
+                </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div id="todolist">
+                    {{template "tasks.tmpl" .}}
+                </div> 
+            </div>
     </div>
 </body>
 </html>

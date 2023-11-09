@@ -1,29 +1,28 @@
-<form>
-  <fieldset>
- 	{{range $task := .}}
+{{range $task := .}}
+        {{template "task-card.tmpl" $task}}
+{{ end }}
 
-  		<div class="form-group row">
-			<div class="col-sm-3">
-				<input 
-					type="checkbox" 
-					{{ if $task.Done }} hx-post="/tasks/{{ $task.ID }}/todo" {{ end }}
-				    {{ if not $task.Done }} hx-post="/tasks/{{ $task.ID }}/done" {{ end }}	
-					hx-trigger="change" 
-					hx-target="#todolist" 
-					hx-swap="innerHTML"
-					{{ if $task.Done }} checked {{ end }}	
-				/>
-			</div>
-			<div class="col-sm-9" 
-				{{ if $task.Done }} hx-post="/tasks/{{ $task.ID }}/todo" {{ end }}
-				{{ if not $task.Done }} hx-post="/tasks/{{ $task.ID }}/done" {{ end }}	
-				hx-target="#todolist"
-				hx-target="#todolist" 
-				hx-swap="innerHTML"
-				>
-				{{ $task.Title }}
-			</div>
-		</div>
-	{{ end }}
-	</fieldset>
-	</form>
+<div class="list-group">
+{{range $task := .}}
+  <div class="list-group-item list-group-item-action flex-column align-items-start">
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{ $task.Title }}</h5>
+      <small>
+	  	{{ $task.AddedTimeAgo }}
+	</small>
+	  
+    </div>
+    <p class="mb-1">{{ $task.Description }}</p>
+    <small>email@example.com</small>
+	<div>
+		<h6 class="mb-1">Status:</h6>
+
+		{{ if $task.IsDone }}
+			<span class="badge bg-success">{{ $task.DoneTimeAgo }}</span>	
+		{{ else }}
+			<span class="badge bg-light">pending</span>	
+		{{ end }}
+	</div>
+  </div>
+{{ end }}
+ </div>

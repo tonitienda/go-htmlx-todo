@@ -12,7 +12,9 @@ import (
 func index(c *gin.Context) {
 	fmt.Println("Index")
 
-	c.HTML(http.StatusOK, "index.tmpl", nil)
+	tasks := tasks.GetTasks()
+
+	c.HTML(http.StatusOK, "index.tmpl", tasks)
 }
 
 func getTasks(c *gin.Context) {
