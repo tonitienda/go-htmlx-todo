@@ -1,5 +1,9 @@
-<div class="card mb-3 {{ if .IsDone }} border-success {{ else }} border-light {{ end }}">  
-  <div class="card-header" style="height:12px;padding: 0"></div>
+<div
+  class="card mb-3 {{ if .IsDone }} border-success {{ else }} border-light {{
+    end
+  }}"
+>
+  <div class="card-header" style="height: 12px; padding: 0"></div>
   <div class="card-body">
     <h5 class="card-title">{{ .Title }}</h5>
     <h6 class="card-subtitle text-muted">Created {{ .AddedTimeAgo }}</h6>
@@ -19,11 +23,11 @@
     <a href="#" class="card-link">Another link</a>
   </div>
   <div class="card-footer text-muted">
-    {{ if .IsDone }} 
-      <span class="badge badge-success">Done {{ .DoneTimeAgo }}</span> 
-      <span class="badge badge-success">Took {{ .Took }}</span> 
-    {{ else }} 
-      <span class="badge badge-dark">Not done</span>
+    {{ if .IsDone }}
+    <span class="badge badge-success">Done {{ .DoneTimeAgo }}</span>
+    <span class="badge badge-success">Took {{ .Took }}</span>
+    {{ else }}
+    <span class="badge badge-dark">Not done</span>
     {{ end }}
   </div>
-  </div>
+</div>

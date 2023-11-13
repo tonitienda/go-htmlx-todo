@@ -3,7 +3,6 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"strconv"
 
 	"github.com/gin-gonic/gin"
 	"github.com/tonitienda/go-htmlx-todo/pkg/tasks"
@@ -27,12 +26,7 @@ func getTasks(c *gin.Context) {
 
 func markTaskAsDone(c *gin.Context) {
 	// Task ID  is in the URL
-	taskId, err := strconv.Atoi(c.Param("id"))
-
-	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
-		return
-	}
+	taskId := c.Param("id")
 
 	tasks.MarkAsDone(taskId)
 	getTasks(c)
@@ -43,19 +37,16 @@ func addTask(c *gin.Context) {
 	title := c.PostForm("title")
 	description := c.PostForm("description")
 
-	tasks.AddTask(title, description)
+	dependsOn := c.PostForm("dependsOn")
+
+	tasks.AddTask(title, description, dependsOn)
 
 	getTasks(c)
 }
 
 func markAsTodo(c *gin.Context) {
 	// Task ID  is in the URL
-	taskId, err := strconv.Atoi(c.Param("id"))
-
-	if err != nil {
-		c.AbortWithError(http.StatusBadRequest, err)
-		return
-	}
+	taskId := c.Param("id")
 
 	tasks.MarkAsTodo(taskId)
 	getTasks(c)

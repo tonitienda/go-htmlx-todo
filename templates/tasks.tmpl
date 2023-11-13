@@ -1,28 +1,29 @@
 {{range $task := .}}
-        {{template "task-card.tmpl" $task}}
+{{template "task-card.tmpl" $task}}
 {{ end }}
 
 <div class="list-group">
-{{range $task := .}}
-  <div class="list-group-item list-group-item-action flex-column align-items-start">
+  {{range $task := .}}
+  <div
+    class="list-group-item list-group-item-action flex-column align-items-start"
+  >
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ $task.Title }}</h5>
       <small>
-	  	{{ $task.AddedTimeAgo }}
-	</small>
-	  
+        {{ $task.AddedTimeAgo }}
+      </small>
     </div>
     <p class="mb-1">{{ $task.Description }}</p>
     <small>email@example.com</small>
-	<div>
-		<h6 class="mb-1">Status:</h6>
+    <div>
+      <h6 class="mb-1">Status:</h6>
 
-		{{ if $task.IsDone }}
-			<span class="badge bg-success">{{ $task.DoneTimeAgo }}</span>	
-		{{ else }}
-			<span class="badge bg-light">pending</span>	
-		{{ end }}
-	</div>
+      {{ if $task.IsDone }}
+      <span class="badge bg-success">{{ $task.DoneTimeAgo }}</span>
+      {{ else }}
+      <span class="badge bg-light">pending</span>
+      {{ end }}
+    </div>
   </div>
-{{ end }}
- </div>
+  {{ end }}
+</div>

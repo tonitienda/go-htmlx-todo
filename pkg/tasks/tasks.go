@@ -3,15 +3,17 @@ package tasks
 import (
 	"time"
 
+	"github.com/google/uuid"
 	"github.com/xeonx/timeago"
 )
 
 type Task struct {
-	ID          int
+	ID          string
 	Title       string
 	Description string
 	AddedAt     time.Time
 	DoneAt      time.Time
+	DependsOn   string
 }
 
 func (t Task) IsDone() bool {
@@ -30,19 +32,19 @@ func (t Task) Took() string {
 	return t.DoneAt.Sub(t.AddedAt).String()
 }
 
-var inMemoryTasks map[int]Task
+var inMemoryTasks map[string]Task
 
 func init() {
-	inMemoryTasks = map[int]Task{
-		1: {
-			ID:          1,
+	inMemoryTasks = map[string]Task{
+		"89c2553e-3f12-49a3-b429-3c9c15b76341": {
+			ID:          "89c2553e-3f12-49a3-b429-3c9c15b76341",
 			Title:       "First task",
 			Description: "This is the description for the first task",
 			AddedAt:     time.Date(2023, 11, 05, 8, 30, 0, 0, time.UTC),
 			DoneAt:      time.Date(2023, 11, 06, 10, 20, 0, 0, time.UTC),
 		},
-		2: {
-			ID:          2,
+		"aef9c208-0874-45af-94dc-87a48a2cd171": {
+			ID:          "aef9c208-0874-45af-94dc-87a48a2cd171",
 			Title:       "Second task",
 			Description: "This is the description for the second task",
 			AddedAt:     time.Date(2023, 11, 04, 8, 30, 0, 0, time.UTC),
@@ -61,20 +63,21 @@ func GetTasks() []Task {
 
 }
 
-func AddTask(title string, description string) (int, error) {
+func AddTask(title string, description string, dependsOn string) (string, error) {
 	// TODO - Add validation
 
-	id := len(inMemoryTasks) + 1
+	id := uuid.NewString()
 	inMemoryTasks[id] = Task{
 		ID:          id,
 		Title:       title,
 		Description: description,
 		AddedAt:     time.Now(),
+		DependsOn:   dependsOn,
 	}
 	return id, nil
 }
 
-func MarkAsDone(id int) {
+func MarkAsDone(id string) {
 	// Convert map to slice of values
 	task, ok := inMemoryTasks[id]
 	if !ok {
@@ -85,7 +88,7 @@ func MarkAsDone(id int) {
 	inMemoryTasks[id] = task
 }
 
-func MarkAsTodo(id int) {
+func MarkAsTodo(id string) {
 	// Convert map to slice of values
 	task, ok := inMemoryTasks[id]
 	if !ok {
