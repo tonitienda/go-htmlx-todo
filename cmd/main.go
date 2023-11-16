@@ -12,8 +12,8 @@ func index(c *gin.Context) {
 	fmt.Println("Index")
 
 	tasks := tasks.GetTasks()
-
-	c.HTML(http.StatusOK, "task-mgmt-2.tmpl", tasks)
+	fmt.Println(tasks)
+	c.HTML(http.StatusOK, "task-mgmt.tmpl", tasks)
 }
 
 func getTasks(c *gin.Context) {
