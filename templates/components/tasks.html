@@ -1,6 +1,4 @@
-{{range $task := .}}
-{{template "task-card.tmpl" $task}}
-{{ end }}
+{{range $task := .}} {{template "task-card.html" $task}} {{ end }}
 
 <div class="list-group">
   {{range $task := .}}
@@ -9,9 +7,7 @@
   >
     <div class="d-flex w-100 justify-content-between">
       <h5 class="mb-1">{{ $task.Title }}</h5>
-      <small>
-        {{ $task.AddedTimeAgo }}
-      </small>
+      <small> {{ $task.AddedTimeAgo }} </small>
     </div>
     <p class="mb-1">{{ $task.Description }}</p>
     <small>email@example.com</small>

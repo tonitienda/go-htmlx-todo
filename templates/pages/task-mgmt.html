@@ -1,5 +1,4 @@
-{{template "index.tmpl" . }}
-{{ define "main" }}
+{{template "index.html" . }} {{ define "main" }}
 <div class="main">
   <h1>TODO</h1>
 
@@ -7,15 +6,11 @@
     <div class="col-sm-6">
       <div class="card text-white bg-secondary">
         <div class="card-header">Add a new task</div>
-        <div class="card-body">
-          {{template "task-form.tmpl" .}}
-        </div>
+        <div class="card-body">{{template "task-form.html" .}}</div>
       </div>
     </div>
     <div class="col-sm-6">
-      <div id="todolist">
-        {{template "tasks.tmpl" .}}
-      </div>
+      <div id="todolist">{{template "tasks.html" .}}</div>
     </div>
   </div>
 </div>

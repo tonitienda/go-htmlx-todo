@@ -13,7 +13,7 @@ func index(c *gin.Context) {
 
 	tasks := tasks.GetTasks()
 	fmt.Println(tasks)
-	c.HTML(http.StatusOK, "task-mgmt.tmpl", tasks)
+	c.HTML(http.StatusOK, "task-mgmt.html", tasks)
 }
 
 func getTasks(c *gin.Context) {
@@ -21,7 +21,7 @@ func getTasks(c *gin.Context) {
 
 	tasks := tasks.GetTasks()
 
-	c.HTML(http.StatusOK, "components/tasks.tmpl", tasks)
+	c.HTML(http.StatusOK, "components/tasks.html", tasks)
 }
 
 func markTaskAsDone(c *gin.Context) {
@@ -57,7 +57,7 @@ func main() {
 	router := gin.Default()
 
 	// Pre compile templates
-	router.LoadHTMLGlob("templates/**/*.tmpl")
+	router.LoadHTMLGlob("templates/**/*.html")
 
 	router.GET("/", index)
 	router.GET("/tasks", getTasks)

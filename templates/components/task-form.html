@@ -35,9 +35,7 @@
         <option value="0">No dependencies</option>
         {{range $task := .}}
         <option value="{{ $task.ID }}">{{ $task.Title }}</option>
-        {{
-          end
-        }}
+        {{ end }}
       </select>
     </div>
   </fieldset>
