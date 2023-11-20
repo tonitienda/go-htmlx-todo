@@ -12,8 +12,36 @@ func index(c *gin.Context) {
 	fmt.Println("Index")
 
 	tasks := tasks.GetTasks()
+
 	fmt.Println(tasks)
-	c.HTML(http.StatusOK, "task-mgmt.html", tasks)
+	c.HTML(http.StatusOK, "index", gin.H{
+		"Page":  "home",
+		"Tasks": tasks,
+	})
+}
+
+func tasksTree(c *gin.Context) {
+	fmt.Println("Tasks Tree")
+
+	tasks := tasks.GetTasks()
+
+	fmt.Println(tasks)
+	c.HTML(http.StatusOK, "index", gin.H{
+		"Page":  "tasks-tree",
+		"Tasks": tasks,
+	})
+}
+
+func tasksMgmt(c *gin.Context) {
+	fmt.Println("Tasks Mgmt")
+
+	tasks := tasks.GetTasks()
+
+	fmt.Println(tasks)
+	c.HTML(http.StatusOK, "index", gin.H{
+		"Page":  "tasks-mgmt",
+		"Tasks": tasks,
+	})
 }
 
 func getTasks(c *gin.Context) {
@@ -59,8 +87,15 @@ func main() {
 	// Pre compile templates
 	router.LoadHTMLGlob("templates/**/*.html")
 
+	// Full pages
 	router.GET("/", index)
+	router.GET("/tasks/tree", tasksTree)
+	router.GET("/tasks/mgmt", tasksMgmt)
+
+	// Fragments
 	router.GET("/tasks", getTasks)
+
+	// Commands
 	router.POST("/tasks", addTask)
 	router.POST("/tasks/:id/done", markTaskAsDone)
 	router.POST("/tasks/:id/todo", markAsTodo)

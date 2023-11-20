@@ -1,3 +1,4 @@
+{{ define "index"}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -17,6 +18,10 @@
     />
   </head>
   <body>
-    {{template "navbar.html"}} {{ block "main" . }}{{ end }}
+    {{template "navbar.html" .}} {{ if eq .Page "tasks-mgmt" }} {{ template
+    "tasks-mgmt" . }} {{ else if eq .Page "tasks-tree" }} {{ template
+    "tasks-tree" . }} {{ else if eq .Page "home" }} {{ template "home" . }} {{
+    end }}
   </body>
 </html>
+{{ end }}
