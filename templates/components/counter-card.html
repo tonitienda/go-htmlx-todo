@@ -1,0 +1,13 @@
+{{ define "counter-card"}}
+
+<div
+  class="card text-white bg-{{.Level}} mb-2"
+  style="max-width: 20rem; text-align: center"
+>
+  <div class="card-body">
+    <h4 class="card-title">{{.Title}}</h4>
+    <h1 class="card-title" style="text-align: center">{{.Count}}</h1>
+  </div>
+</div>
+
+{{ end }}

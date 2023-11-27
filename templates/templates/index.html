@@ -18,10 +18,12 @@
     />
   </head>
   <body>
-    {{template "navbar.html" .}} {{ if eq .Page "tasks-mgmt" }} {{ template
-    "tasks-mgmt" . }} {{ else if eq .Page "tasks-tree" }} {{ template
-    "tasks-tree" . }} {{ else if eq .Page "home" }} {{ template "home" . }} {{
-    end }}
+    {{template "navbar.html" .}}
+    <div class="main" style="padding: 24px">
+      {{ if eq .Page "tasks-mgmt" }} {{ template "tasks-mgmt" . }} {{ else if eq
+      .Page "tasks-tree" }} {{ template "tasks-tree" . }} {{ else if eq .Page
+      "home" }} {{ template "home" . }} {{ end }}
+    </div>
   </body>
 </html>
 {{ end }}

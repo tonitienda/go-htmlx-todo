@@ -1,5 +1,4 @@
 {{ define "home" }}
-<div class="main">
-  <h1>Home</h1>
-</div>
-{{ end }}
+<h1>Home</h1>
+{{range $card := .Cards}} {{ template "counter-card" $card }} {{ end }} {{ end
+}}

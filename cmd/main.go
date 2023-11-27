@@ -8,15 +8,44 @@ import (
 	"github.com/tonitienda/go-htmlx-todo/pkg/tasks"
 )
 
+type CounterCardData struct {
+	Title string
+	Count int
+	Level string
+}
+
+func filter(allTasks []tasks.Task, predicate func(tasks.Task) bool) []tasks.Task {
+	filtered := make([]tasks.Task, 0, len(allTasks))
+	for _, task := range allTasks {
+		if predicate(task) {
+			filtered = append(filtered, task)
+		}
+	}
+	return filtered
+}
+
 func index(c *gin.Context) {
 	fmt.Println("Index")
 
-	tasks := tasks.GetTasks()
+	allTasks := tasks.GetTasks()
 
-	fmt.Println(tasks)
+	doneTasks := filter(allTasks, func(task tasks.Task) bool { return task.IsDone() })
+
 	c.HTML(http.StatusOK, "index", gin.H{
 		"Page":  "home",
-		"Tasks": tasks,
+		"Tasks": allTasks,
+		"Cards": []CounterCardData{
+			{
+				Title: "All Tasks",
+				Count: len(allTasks),
+				Level: "info",
+			},
+			{
+				Title: "Done",
+				Count: len(doneTasks),
+				Level: "success",
+			},
+		},
 	})
 }
 

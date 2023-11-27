@@ -1,17 +1,15 @@
 {{ define "tasks-mgmt" }}
-<div class="main">
-  <h1>TODO</h1>
+<h1>TODO</h1>
 
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="card text-white bg-secondary">
-        <div class="card-header">Add a new task</div>
-        <div class="card-body">{{template "task-form.html" .Tasks}}</div>
-      </div>
+<div class="row">
+  <div class="col-sm-6">
+    <div class="card text-white bg-secondary">
+      <div class="card-header">Add a new task</div>
+      <div class="card-body">{{template "task-form.html" .Tasks}}</div>
     </div>
-    <div class="col-sm-6">
-      <div id="todolist">{{template "tasks.html" .Tasks}}</div>
-    </div>
+  </div>
+  <div class="col-sm-6">
+    <div id="todolist">{{template "tasks.html" .Tasks}}</div>
   </div>
 </div>
 {{ end }}
